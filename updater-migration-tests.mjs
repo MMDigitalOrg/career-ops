@@ -61,6 +61,7 @@ const requiredSystemPaths = [
   '.claude-plugin/',
   '.qwen/',
   '.antigravitycli/skills/',
+  'cv-template-colors-tests.mjs',
   'tracker-columns-tests.mjs',
   'updater-migration-tests.mjs',
   'README.ar.md',
