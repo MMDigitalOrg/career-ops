@@ -34,6 +34,7 @@ assert.throws(
 );
 
 const governedMappings = [
+  ['body', 'color', '#27313C'],
   ['.header h1', 'color', '#102A43'],
   ['.header-gradient', 'background', '#274C77'],
   ['.contact-row', 'color', '#687684'],
@@ -69,7 +70,7 @@ for (const token of ['#102A43', '#183B5B', '#274C77', '#687684', '#EEF3F8', '#C9
   assert.ok(template.includes(token), `missing Executive Navy token ${token}`);
 }
 
-for (const legacy of ['hsl(187', 'hsl(270', 'linear-gradient(to right', 'linear-gradient(to left', '#555', '#888', '#ccc']) {
+for (const legacy of ['hsl(187', 'hsl(270', 'linear-gradient(to right', 'linear-gradient(to left', '#1a1a2e', '#555', '#888', '#ccc']) {
   assert.equal(template.includes(legacy), false, `legacy palette remains: ${legacy}`);
 }
 
