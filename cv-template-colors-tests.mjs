@@ -3,10 +3,15 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const template = readFileSync(new URL('./templates/cv-template.html', import.meta.url), 'utf8');
+const ambiguityFixture = `
+html[lang="ar"] .header-gradient {
+  background: #274C77;
+}
+`;
 
-function cssBlock(selector) {
+function cssBlock(selector, source = template) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const match = template.match(new RegExp(`${escaped}\\s*\\{([^}]+)\\}`, 'm'));
+  const match = source.match(new RegExp(`(?:^|\\n)\\s*${escaped}\\s*\\{([^}]+)\\}`, 'm'));
   assert.ok(match, `missing CSS rule for ${selector}`);
   return match[1];
 }
@@ -21,6 +26,12 @@ function assertDeclaration(selector, property, value) {
     `${selector} should set ${property}: ${value}`,
   );
 }
+
+assert.throws(
+  () => cssBlock('.header-gradient', ambiguityFixture),
+  /missing CSS rule/,
+  'base .header-gradient matcher must not match the RTL-only selector',
+);
 
 const governedMappings = [
   ['.header h1', 'color', '#102A43'],
