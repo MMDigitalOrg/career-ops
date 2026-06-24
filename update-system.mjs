@@ -97,6 +97,7 @@ const SYSTEM_PATHS = [
   'gemini-eval.mjs',
   'test-all.mjs',
   'test-salary-filter.mjs',
+  'cv-template-colors-tests.mjs',
   'tracker-columns-tests.mjs',
   'validate-portals.mjs',
   'verify-portals.mjs',
